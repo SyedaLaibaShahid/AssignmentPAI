@@ -10,4 +10,21 @@ class Product:
       pass
 
   def make_purchase(self, quantity):
-      pass
+        try:
+            if quantity < 0:
+              raise ValueError("Quantity cannot be negative.")
+            elif quantity > self.amount:
+              raise ValueError("Not enough items in stock.")
+
+            total_cost = self.get_price(quantity)
+            self.amount -= quantity
+            print(f"Purchased {quantity} items of {self.name}")
+            print(f"Total cost: ${total_cost:.2f}")
+            print(f"Remaining stock: {self.amount}")
+
+        except ValueError as e:
+            print(e)
+product = Product("Widget",150,10.00)  
+product.make_purchase(5)
+product.make_purchase(50)
+product.make_purchase(150)
